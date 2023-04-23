@@ -313,22 +313,8 @@ void Countdowntimer() {
 }
 void LightLed() {
   int target = random(1, 6);
-  if (target == 1) {
-    targetTimer[0]++;
-    displayColor(0, 255, 0, leds[0]);
-  } else if (target == 2) {
-    targetTimer[1]++;
-    displayColor(0, 255, 0, leds[1]);
-  } else if (target == 3) {
-    targetTimer[2]++;
-    displayColor(0, 255, 0, leds[2]);
-  } else if (target == 4) {
-    targetTimer[3]++;
-    displayColor(0, 255, 0, leds[3]);
-  } else if (target == 5) {
-    targetTimer[4]++;
-    displayColor(0, 255, 0, leds[4]);
-  }
+    targetTimer[target - 1]++;
+    displayColor(0, 255, 0, leds[target - 1]);
 }
 void LighOffLed() {
   if (readingSensor[0] < val_seuil) {
