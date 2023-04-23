@@ -20,8 +20,6 @@ class Led {
     }
 };
 void displayColor(byte r, byte g, byte b, Led led) {
-  // Assigne l'état des broches
-  // Version cathode commune
   analogWrite(led.r, r);
   analogWrite(led.g, g);
   analogWrite(led.b, b);
@@ -42,7 +40,7 @@ Led leds[5] = {
   Led(35, 34, 36),  // Led 4
   Led(39, 38, 40)  // Led 5
 };
-int button[] = {A11, A12, A13, A14, A15}; //The four button input pins
+int button[] = {A11, A12, A13, A14, A15}; //The five buttons input pins
 int MyScore = 0;
 int highscore = 0;
 
@@ -72,7 +70,7 @@ void setup() {
   for (int i = 0; i < 5; i++) {
     leds[i].InitLed();
   }
-  //ShowModes();
+  ShowModes();
 }
 
 void loop() {
