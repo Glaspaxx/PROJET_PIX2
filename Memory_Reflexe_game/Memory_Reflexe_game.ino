@@ -24,14 +24,12 @@ void displayColor(byte r, byte g, byte b, Led led) {
   analogWrite(led.g, g);
   analogWrite(led.b, b);
 }
-Servo servo_flag;  // create servo object to control a servo
-Servo servo_sweetie;
-int pos = 0;
+Servo servo_flag;  // create servo object to control the first servo which will show a red or green flag
+Servo servo_sweetie; // create servo object to control the second servo which will open a trap to give the player a sweet
 const int val_seuil = 11;
-int turn = 0;
 int buttonstate = 0;
-int led_mode_1 = 52; // mode mémoire
-int led_mode_2 = 53; // mode rapidité
+int led_mode_1 = 52; // Memory mode
+int led_mode_2 = 53; // Reflexe mode
 int mode;
 Led leds[5] = {
   Led(23, 22, 24),  // Led 1
@@ -47,6 +45,7 @@ int highscore = 0;
 //Mode 1
 int randomArray[50]; //long to store up to 50 inputs
 int inputArray[50];
+int turn = 0;
 
 // Mode 2
 int readingSensor[5];
@@ -64,7 +63,7 @@ void setup() {
   {
     pinMode(button[x], INPUT);
   }
-  // Initialise les broches des leds RGB et des deux leds des modes
+  // Initializes the pins of the RGB LEDs and the two LEDs for the mode selection
   pinMode(led_mode_1, OUTPUT);
   pinMode(led_mode_2, OUTPUT);
   for (int i = 0; i < 5; i++) {
@@ -120,8 +119,8 @@ void mode_1() {
 
       if (MyScore > highscore && MyScore != 0) {
         highscore = y;
-        //Servo pour flag
-        //Sort le drapeau vert
+        //Servo for the flag
+        //turns clock-wise to show green flag
         servo_flag.write(180);
         delay(3000);
         servo_flag.write(90);
@@ -131,8 +130,8 @@ void mode_1() {
       Serial.print(y);
       Serial.println("");
       if (MyScore % 5 == 0 && MyScore != 0) {
-        //Servo pour bonbon
-        //Sort un bonbon si le score est multiple de 5
+        //Servo for sweets
+        //the servo opens the trap when the score is a multiple of 5
         servo_sweetie.write(180);
         delay(1000);
         servo_sweetie.write(90);
@@ -267,7 +266,7 @@ void fail_mode_1() {
     lcd.setCursor(0, 0);
     lcd.print("  GAME OVER !!");
   }
-  //Sort le drapeau rouge
+  //Shows red flag
   servo_flag.write(0);
   delay(3000);
   servo_flag.write(90);
