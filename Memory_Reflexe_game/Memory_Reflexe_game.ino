@@ -96,16 +96,17 @@ void loop() {
 void mode_1() {
   for (int y = 0; y <= 2; y++)
   {
-    //function for generating the array to be matched by the player
+    //Turn all Leds in green to confirm a good answer
     for (int i = 0; i < 5; i++) {
       displayColor(0, 255, 0, leds[i]);
     }
     delay(1000);
+    //Light off all Leds
     for (int i = 0; i < 5; i++) {
       displayColor(0, 0, 0, leds[i]);
     }
     delay(1000);
-
+    //function for generating the array to be matched by the player
     for (int y = turn; y <= turn; y++) //untuk sekali random
     { //Limited by the turn variable
       Serial.println(""); //Some serial output to follow along
@@ -158,7 +159,6 @@ void mode_1() {
             displayColor(0, 0, 0, leds[1]);
             delay(100);
           }
-
           if (randomArray[x] == 3 && leds[y].r == 31)
           {
             displayColor(0, 0, 255, leds[2]);
@@ -166,7 +166,6 @@ void mode_1() {
             displayColor(0, 0, 0, leds[2]);
             delay(100);
           }
-
           if (randomArray[x] == 4 && leds[y].r == 35)
           {
             displayColor(0, 0, 255, leds[3]);
@@ -255,10 +254,12 @@ void input_mode_1() {
 void fail_mode_1() {
   // Flashe les leds pour indiquer l'echec
   for (int i = 0 ; i <= 3; i++) {
+    //Turn on all Leds in red
     for (int i = 0; i < 5; i++) {
       displayColor(255, 0, 0, leds[i]);
     }
     delay(200);
+    // Light off all Leds
     for (int i = 0; i < 5; i++) {
       displayColor(0, 0, 0, leds[i]);
     }
@@ -313,8 +314,8 @@ void Countdowntimer() {
 }
 void LightLed() {
   int target = random(1, 6);
-    targetTimer[target - 1]++;
-    displayColor(0, 255, 0, leds[target - 1]);
+  targetTimer[target - 1]++;
+  displayColor(0, 255, 0, leds[target - 1]);
 }
 void LighOffLed() {
   if (readingSensor[0] < val_seuil) {
@@ -340,6 +341,7 @@ void LighOffLed() {
 }
 void ifZero() {
   if (timer == 0) {
+    // Light off all leds
     for (int i = 0; i < 5; i++) {
       displayColor(0, 0, 0, leds[i]);
     }
