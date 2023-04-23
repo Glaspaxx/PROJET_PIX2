@@ -395,6 +395,7 @@ void ShowModes() {
   lcd.setCursor(0, 1);
   lcd.print("       Reflexe >");
   bool valider = true;
+  mode = 0;
   while (valider) {
     int lecture_1 = analogRead(button[0]);
     Serial.println(lecture_1);
@@ -424,6 +425,7 @@ void ShowModes() {
       mode = 2;
     }
     delay(25);
+    Serial.println("Mode: " + (String) (mode));
   }
   delay(1000);
 }
